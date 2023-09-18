@@ -1,19 +1,13 @@
-window.onload = () => {
-  "use strict";
-  if("serviceWorker" in navigator){
-      navigator.serviceWorker.register("./sw.js");
-  }
-};
-
-if('serviceWorker' in navigator){
+//registrando a service worker
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
-    try{
+    try {
       let reg;
       reg = await navigator.serviceWorker.register('/sw.js', { type: "module" });
 
-      console.log('service worker registrada!', reg);
+      console.log('Service worker registrada! 😎', reg);
     } catch (err) {
-      console.log('registro de service worker falhou!', err);
+      console.log('😥 Service worker registro falhou: ', err);
     }
   });
 }

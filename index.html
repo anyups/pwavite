@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="images/icons8-kenny-mccormick-256.png" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="js/db.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <meta name="description" content="exemplo de fallback">
+    <title>Minha primeira PWA</title>
+    <link rel="apple-touch-icon" href="images/pwa-icon-256.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!--viewport para designers responsivos (mobo), content é a configuração-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="white" />
-    <meta name="description" content="pwavite">
-    <title>kenny</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="favicon.ico">
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/db.js"></script>
 </head>
 
 <body class="fullscreen">
-
-  <div class="container">
-    <img src="images/icons8-kenny-mccormick-256.png" alt="kenny" height="40px">
-    <h1 class="title">aaaaaaaaa</h1>
-    nome<input type="text" name="nome" id="nome"><br/>
-    idade<input type="text" name="idade" id="idade">
-    <button id="salvar">salvar</button>
-    <button id="listar">listar</button>
-  </div>
-
+    <div class="container">
+        <h1 class="title">Minha primeira PWA</h1>
+        <div style="text-align: center;">
+            <img src="/images/pwa-icon-256.png" alt="pwa" width="256" height="256">
+        </div>
+        nome<input type="text" name="name" id="name">
+        idade<input type="number" name="age" id="age">
+            <button id="btnSalvar">Salvar</button>
+            <button id="btnListar">Listar</button>
+        </div>
+        <div>
+            <output></output>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -2,58 +2,65 @@ import { openDB } from "idb";
 
 let db;
 
-async function createDB(){
+async function createDB() {
     try {
         db = await openDB('banco', 1, {
-            upgrade(db, oldVersion, newVersion, transaction){
+            upgrade(db, oldVersion, newVersion, transaction) {
                 switch (oldVersion) {
                     case 0:
-                    case 1: 
+                    case 1:
                         const store = db.createObjectStore('pessoas', {
                             keyPath: 'nome'
                         });
                         store.createIndex('id', 'id');
-                        showResult("banco de dados criado!");
+                        showResult("Banco de dados criado!");
                 }
             }
         });
-        showResult("banco de dados aberto.");
-    } catch (e){
-        showResult("erro ao criar banco de dados" + e.message)
+        showResult("Banco de dados aberto.");
+    } catch (e) {
+        showResult("Erro ao criar o banco de dados: " + e.message)
     }
 }
 
 window.addEventListener("DOMContentLoaded", async event => {
     createDB();
-    document.getElementById("nome");
-    document.getElementById("idade");
-    document.getElementById("salvar").addEventListener("click", addData);
-    document.getElementById("listar").addEventListener("click", getData);
+    document.getElementById("input").addEventListener("input", getData);
+    document.getElementById("btnSalvar").addEventListener("click", addData);
+    document.getElementById("btnListar").addEventListener("click", getData);
 });
 
-async function getData(){
-    if(db == undefined) {
-        showResult("o banco de dados esta fechado");
+async function getData() {
+    if (db == undefined) {
+        showResult("O banco de dados está fechado");
         return;
     }
 
     const tx = await db.transaction('pessoas', 'readonly')
     const store = tx.objectStore('pessoas');
     const value = await store.getAll();
-    if(value){
-        showResult("dados do banco:" + JSON.stringify(value))
-    } else{
-        showResult("não há nenhum dado no banco.")
+    if (value) {
+        showResult("Dados do banco: " + JSON.stringify(value))
+    } else {
+        showResult("Não há nenhum dado no banco!")
     }
 }
 
-async function addData(){
+
+async function addData() {
     const tx = await db.transaction('pessoas', 'readwrite');
     const store = tx.objectStore('pessoas');
-    store.add({ nome: 'fulano' });
+    store.add({ nome: getElementById("name"),
+                idade: getElementById("age") });
     await tx.done;
+    return limpar;
+}
+function limpar(){
+    getElementById("name") = '',
+    getElementById("age") = ''
 }
 
-function showResult(text){
-    document.querySelector("output").innerHTML = text;
+
+function showResult(text) {
+    document.querySelector(addData5).innerHTML = text;
 }
